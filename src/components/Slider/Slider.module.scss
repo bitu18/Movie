@@ -1,0 +1,58 @@
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+swiper-container {
+    width: 100%;
+}
+
+.poster {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    transition: transform 0.3s;
+}
+
+.swiper-slide:not(.swiper-slide-active) .poster {
+    opacity: 0.5;
+}
+
+.title {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: calc(100% - 400px);
+    background: rgba(34, 34, 34, 0.6);
+    padding: 10px 25px;
+}
+
+.title-eng,
+.title-vi {
+    margin: 0;
+    line-height: normal; /* Set normal line-height */
+}
+
+.title-eng {
+    font-size: 2rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.title-vi {
+    font-size: 1.6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

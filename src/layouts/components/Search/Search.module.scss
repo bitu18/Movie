@@ -1,0 +1,102 @@
+.search-result {
+    width: var(--default-width-search);
+    overflow-y: auto;
+    max-height: 450px;
+}
+
+.search {
+    position: relative;
+    background-color: #3c3c3c;
+    width: var(--default-width-search);
+    height: 40px;
+    padding: 0 0 0 16px;
+    align-items: center;
+    display: flex;
+    border-radius: var(--border-radius);
+    border: 1.2px solid var(--primary-color);
+
+    input {
+        flex: 1;
+        height: 100%;
+        padding-right: 40px;
+        color: var(--white-color);
+        caret-color: var(--primary-color);
+        font-size: 1.6rem;
+        background-color: transparent;
+    }
+    input:not(:placeholder-shown) ~ .search-btn {
+        color: var(--primary-color);
+    }
+
+    &::before {
+        position: absolute;
+        content: '';
+        top: 50%;
+        transform: translateY(-50%);
+        right: var(--search-btn-width);
+        width: 1px;
+        height: 26px;
+        background-color: var(--primary-color);
+    }
+}
+
+.clear,
+.loading {
+    position: absolute;
+    right: var(--search-btn-width);
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 16px;
+    font-size: 1.5rem;
+    color: #a8a3a3;
+    background-color: transparent;
+}
+.loading {
+    animation: spinner 1s infinite;
+}
+
+/* Có thêm translateY(-50%) vì .clear and .loading có chung transform 
+nên .loading sẽ bị ghi đè trong keyframes */
+@keyframes spinner {
+    from {
+        transform: translateY(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+.search-btn {
+    position: absolute;
+    right: 0;
+    width: var(--search-btn-width);
+    height: 100%;
+    font-size: 1.6rem;
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    background-color: transparent;
+    color: #a8a3a3;
+    cursor: pointer;
+
+    &:hover {
+        color: var(--primary-color);
+    }
+}
+
+// Responsive
+//Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .search {
+        width: 250px;
+    }
+}
+
+// Mobile
+@media (max-width: 739px) {
+    .search {
+        width: 217px;
+
+        input {
+            font-size: 1.4rem;
+        }
+    }
+}

@@ -1,0 +1,86 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&display=swap');
+
+:root {
+    --background-color-main: #161619;
+    --background-color-sub: #202025;
+    --background-color-popper: #252525;
+
+    --primary-color: #ffaf20;
+    --black-color: #000;
+    --white-color: #fff;
+    --text-color: #ababab;
+
+    --default-layout-header-height: 70px;
+    --default-layout-sort: 60px;
+    --default-width-search: 361px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Noto Serif', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    line-height: 1.6;
+    color: var(--white-color);
+    overflow-y: overlay;
+}
+
+// scrollbar
+html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 6px;
+}
+
+html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: var(--primary-color);
+}
+
+html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: #3c3c3c;
+}
+
+svg {
+    fill: currentColor; /* Ensure SVGs use current color */
+}
+
+.App {
+    background-color: var(--black-color);
+}
+
+input,
+button,
+[tabindex] {
+    outline: none;
+    border: none;
+    color: var(--white-color);
+}
+a {
+    text-decoration: none;
+    color: var(--white-color);
+}
+li {
+    list-style: none;
+}
+
+.front-slash::before {
+    position: relative;
+    content: '/';
+    left: 0;
+    top: 0;
+    margin-right: 10px;
+    color: var(--primary-color);
+    font-weight: 900;
+}

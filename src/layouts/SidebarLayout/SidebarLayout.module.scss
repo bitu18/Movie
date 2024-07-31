@@ -1,0 +1,37 @@
+.content-wrapper {
+    margin-top: 32px;
+}
+
+.title-wrapper {
+}
+.logo {
+    margin-top: 14px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-color);
+    opacity: 0.8;
+    border-radius: 35px;
+}
+.logo-sidebar {
+    width: 200px;
+    height: 200px;
+    // opacity: 0.8;
+}
+.title {
+    font-size: 2.2rem;
+    margin: 30px 25px 0px 25px;
+}
+.list-wrapper {
+    // height: 70vh;
+    // overflow-y: scroll;
+}
+
+.sidebar-movie-search {
+    display: inline-flex;
+    width: 100%;
+    border-bottom: 1px dashed #363636;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 20px 0 20px 10px;
+}
