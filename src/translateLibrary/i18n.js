@@ -21,7 +21,7 @@ i18n.use(LanguageDetector)
                     'View Profile': 'View Profile',
                     'Log out': 'Log out',
                     Home: 'Home',
-                    'Playing Now': 'Playing Now',
+                    'Newest Movie': 'Newest Movie',
                     Movie: 'Movie',
                     'Series Movie': 'Series Movie',
                     'TV Shows': 'TV Shows',
@@ -40,7 +40,7 @@ i18n.use(LanguageDetector)
             vi: {
                 translation: {
                     // Sidebar
-                    'Playing now': 'Phim Đang Chiếu',
+                    'Newest Movie': 'Phim Mới Nhất',
 
                     // Header
                     'Search your movie': 'Tìm kiếm phim...',
@@ -60,7 +60,7 @@ i18n.use(LanguageDetector)
 
                     // Navigation
                     Home: 'Trang Chủ',
-                    'Playing Now': 'Phim Đang Chiếu',
+                    'Newest Movie': 'Phim Mới Nhất',
                     Movie: 'Phim Lẻ',
                     'Series Movie': 'Phim Bộ',
                     'TV Shows': 'Phim Truyền Hình',
@@ -132,7 +132,7 @@ i18n.use(LanguageDetector)
                     Starring: 'Diễn viên',
                     Genre: 'Thể loại',
                     Share: 'Chia Sẻ',
-                    Watch: 'Xem',
+                    Watch: 'Xem Phim',
                     'Movie Content': 'Nội Dung',
                     'Movie Video': 'Chiếu Phim',
                     'Voiceover #1': 'Lồng Tiếng #1',

@@ -47,3 +47,14 @@
     margin-right: -10px;
     font-size: 1.3rem;
 }
+
+// Responsive
+// Mobile
+@media (max-width: 739px) {
+    .movie-category {
+        font-size: 2rem;
+    }
+    .view-all {
+        font-size: 1.4rem;
+    }
+}

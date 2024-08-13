@@ -28,7 +28,7 @@ function Sidebar() {
                     <Image src={img.posterSidebar} className={cx('logo-sidebar')} />
                 </div>
                 <h2 className={cx('title', 'front-slash')}>
-                    <Trans>Playing now</Trans>
+                    <Trans>Newest Movie</Trans>
                 </h2>
             </div>
             <div className={cx('list-wrapper')}>

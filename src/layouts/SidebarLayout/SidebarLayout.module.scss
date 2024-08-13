@@ -35,3 +35,22 @@
     box-sizing: border-box;
     padding: 20px 0 20px 10px;
 }
+
+// Responsive
+// Mobile
+@media (max-width: 739px) {
+    .content-wrapper {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .logo {
+        display: none;
+    }
+    .title {
+        font-size: 2rem;
+        margin: 30px 0 0 0;
+    }
+    .sidebar-movie-search {
+        padding-left: 5px;
+    }
+}

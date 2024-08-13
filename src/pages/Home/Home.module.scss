@@ -1,11 +1,23 @@
-.wrapper + .wrapper {
-    margin-top: 20px;
+.wrapper {
+    padding-right: 30px;
+
+    & + .wrapper {
+        margin-top: 20px;
+    }
 }
 
 .movie-wrapper {
-    width: 100%;
+    // width: 100%;
 }
 
 .movie-item {
     height: 100%;
+}
+
+// Responsive
+// Mobile
+@media (max-width: 739px) {
+    .wrapper {
+        padding-right: 0;
+    }
 }

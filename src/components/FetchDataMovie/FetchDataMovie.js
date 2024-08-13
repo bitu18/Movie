@@ -107,7 +107,7 @@ function FetchDataMovie({ title, slug }) {
                 <HeaderListMovie title={title} viewAll={false} />
                 <div className={cx('row')}>
                     {updateMovies.map((movie, index) => (
-                        <div className={cx('movie-item', 'col l-2 m-3')} key={index}>
+                        <div className={cx('movie-item', 'col l-2 m-3 c-6')} key={index}>
                             <Movie seriesMovie={movie} />
                         </div>
                     ))}

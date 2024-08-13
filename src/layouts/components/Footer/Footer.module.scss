@@ -65,3 +65,20 @@
     font-size: 1.3rem;
     margin: 0 4px;
 }
+
+// Responsive
+// Mobile
+@media (max-width: 739px) {
+    .wrapper-infor {
+        padding: 40px 20px;
+    }
+    .wrapper-text {
+        & > p {
+            font-size: 1.3rem;
+            max-width: 100%;
+        }
+        & > a {
+            font-size: 1.3rem;
+        }
+    }
+}

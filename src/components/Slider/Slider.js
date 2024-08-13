@@ -29,6 +29,7 @@ function Slider() {
 
     useEffect(() => {
         const swiper = document.querySelector('swiper-container').swiper;
+
         swiper.params.coverflowEffect = {
             rotate: 50, // Slide rotate in degrees
             stretch: 0, // Stretch space between slides (in px)
@@ -37,22 +38,36 @@ function Slider() {
             scale: 0.8, // Scale effect for the slides
             slideShadows: true, // Enables slides shadows
         };
+
         swiper.params.autoplay = {
-            delay: 1500,
+            delay: 2000,
             disableOnInteraction: false,
         };
         swiper.params.loop = true;
         swiper.params.loopedSlides = Math.max(3, posters.length); // Set the number of slides to loop
 
+        // Responsive
+        swiper.params.breakpoints = {
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+            },
+            320: {
+                slidesPerView: 1,
+                spaceBetween: 0,
+            },
+        };
+
         swiper.update(); // Update Swiper to apply the effect
         swiper.autoplay.start(); // Start autoplay
     }, [posters]);
+
     return (
         <div className={cx('slider-wrapper')}>
             <swiper-container
                 style={{ '--swiper-navigation-color': '#fff' }}
-                slides-per-view="3"
-                space-between="20"
+                // slides-per-view="3"
+                // space-between="20"
                 center-slides="true"
                 scrollbar-clickable="true"
                 navigation="true"
@@ -61,8 +76,7 @@ function Slider() {
                 rewind="true"
                 scrollbar="false"
                 effect="coverflow"
-                autoplay={{ delay: 1500, disableOnInteraction: false }}
-                loopedSlides={Math.max(3, posters.length)}
+                // pagination="true"
             >
                 {posters.map((poster) => (
                     <swiper-slide key={poster.slug}>

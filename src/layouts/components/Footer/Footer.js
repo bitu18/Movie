@@ -20,7 +20,7 @@ function Footer() {
             <div className={cx('grid wide')}>
                 <div className={cx('wrapper-infor')}>
                     <div className={cx('row')}>
-                        <div className={cx('col l-4')}>
+                        <div className={cx('col l-4 c-12')}>
                             <div className={cx('logo')}>
                                 <Image src={img.logo} alt="logo-movie" className={cx('img')} />
                             </div>
@@ -35,7 +35,7 @@ function Footer() {
                                 </p>
                             </div>
                         </div>
-                        <div className={cx('col l-4')}>
+                        <div className={cx('col l-4 c-12')}>
                             <h2 className={cx('title', 'front-slash')}>
                                 <Trans>Contact</Trans>
                             </h2>
@@ -50,7 +50,7 @@ function Footer() {
                                 </Button>
                             </div>
                         </div>
-                        <div className={cx('col l-4')}>
+                        <div className={cx('col l-4 c-12')}>
                             <h2 className={cx('title', 'front-slash')}>
                                 <Trans>Support</Trans>
                             </h2>

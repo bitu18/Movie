@@ -14,7 +14,7 @@ export const typesList = [
         slug: 'tv-shows',
     },
     {
-        name: 'Playing Now',
+        name: 'Newest Movie',
         slug: 'phim-dang-chieu',
     },
 ];

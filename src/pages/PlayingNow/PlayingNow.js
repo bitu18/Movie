@@ -5,7 +5,7 @@ import FetchDataMovie from '~/components/FetchDataMovie';
 
 const cx = classNames.bind(styles);
 function PlayingNow() {
-    return <FetchDataMovie title="Playing Now" slug="phim-dang-chieu" />;
+    return <FetchDataMovie title="Newest Movie" slug="phim-dang-chieu" />;
 }
 
 export default PlayingNow;

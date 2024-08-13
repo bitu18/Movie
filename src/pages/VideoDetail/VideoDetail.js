@@ -100,7 +100,7 @@ function VideoDetail() {
                 <div className={cx('movie-poster')}>
                     <Image src={movieInfor?.thumb_url} alt={movieInfor?.name} className={cx('movie-thumb')} />
                     <div className={cx('wrapper-btn')}>
-                        <Button border outline>
+                        <Button border outline className={cx('btn--share')}>
                             Share
                         </Button>
                         <Button border primary onClick={handleScroll}>

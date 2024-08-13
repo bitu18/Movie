@@ -26,6 +26,7 @@
     background-color: var(--background-color-sub);
     border: none;
     border-radius: 30px;
+    height: 40px;
     // font-style: italic;
     text-transform: uppercase;
     padding: 10px 50px 10px 20px;
@@ -34,7 +35,7 @@
     -moz-appearance: none;
     appearance: none;
     color: white;
-    font-size: 14px;
+    font-size: 1.4rem;
     vertical-align: middle;
 
     // &:focus {
@@ -74,4 +75,24 @@
 }
 .title-next {
     margin-right: -10px;
+}
+
+//Responsive
+// Mobile
+@media (max-width: 739px) {
+    .wrapper {
+        display: block;
+    }
+    .sort-container {
+        display: block;
+    }
+    .control-select-box > select {
+        width: 100%;
+        margin: 3px;
+        height: 45px;
+    }
+    .btn-navigation {
+        justify-content: center;
+        margin-top: 15px;
+    }
 }

@@ -56,3 +56,21 @@ swiper-container {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+// Responsive
+//Mobile
+
+@media (max-width: 739px) {
+    .poster {
+        height: 250px;
+    }
+    .title {
+        bottom: 0;
+    }
+    .title-eng {
+        font-size: 1.6rem;
+    }
+    .title-vi {
+        font-size: 1.2rem;
+    }
+}

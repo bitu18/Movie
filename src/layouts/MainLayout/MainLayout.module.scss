@@ -11,9 +11,17 @@
     // }
 }
 
+// Responsive
 // Tablet
 @media (min-width: 834px) and (max-width: 1194px) {
     .content-width {
         max-width: 900px;
+    }
+}
+// Mobile
+@media (max-width: 739px) {
+    .content-width {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }

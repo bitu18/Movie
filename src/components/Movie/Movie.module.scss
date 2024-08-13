@@ -25,8 +25,8 @@
 
 .status {
     position: absolute;
-    left: 5px;
-    top: 5px;
+    left: 0px;
+    top: 0px;
     font-size: 1.2rem;
     font-weight: 400;
     background: rgba(224, 149, 15, 0.9);
@@ -55,7 +55,7 @@
 }
 
 .title--vi {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: rgba(255, 255, 255, 0.5);
     line-height: 1.5;
     white-space: nowrap;
@@ -77,4 +77,22 @@
 .poster:hover .play-icon {
     transform: translate(-50%, -50%) scale(0.75);
     opacity: 1;
+}
+
+// Responsive
+// Mobile
+@media (max-width: 739px) {
+    .poster {
+        height: 50vw;
+        // height: 100%;
+    }
+    // .status {
+    //     font-size: 1.1rem;
+    // }
+    // .title--eng {
+    //     font-size: 1.3rem;
+    // }
+    // .title--vi {
+    //     font-size: 1.1rem;
+    // }
 }

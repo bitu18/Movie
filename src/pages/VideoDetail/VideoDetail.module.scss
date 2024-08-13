@@ -21,6 +21,10 @@
 }
 .wrapper-btn {
     margin-left: 0;
+
+    .btn--share {
+        padding: 7px 27px;
+    }
 }
 
 .movie-infor {
@@ -91,6 +95,7 @@
     font-weight: 600;
     text-decoration: none;
     display: inline-flex;
+    margin-left: 5px;
 
     & + .btn {
         margin-left: 8px;
@@ -101,16 +106,19 @@
         background-color: rgba($color: #e0950f, $alpha: 0.9);
     }
 }
-.episode > .btn {
-    padding: 2px;
-    min-width: 35px;
-    justify-content: center;
-    margin: 0 0 5px 0;
-    font-size: 1.4rem;
-    font-weight: 500;
+.episode {
+    .btn {
+        padding: 2px;
+        min-width: 35px;
+        justify-content: center;
+        margin-bottom: 5px;
+        margin-left: 5px;
+        font-size: 1.4rem;
+        font-weight: 500;
 
-    & + .btn {
-        margin-left: 7px;
+        // & + .btn {
+        //     margin-left: 5px;
+        // }
     }
 }
 .server-name {
@@ -124,5 +132,66 @@
 
 // Fetch Video
 .video-play {
+    position: relative;
     width: 100%;
+}
+
+.loading-icon > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    // transform: translate(-50%, -50%);
+    width: 8%;
+    animation: spinnerMovie 0.8s infinite;
+}
+// Add translate(-50%, -50%) same obove because of animation overwrites
+@keyframes spinnerMovie {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+// Responsive
+// Mobile
+@media (max-width: 739px) {
+    .wrapper-movie {
+        display: block;
+    }
+    .movie-poster {
+        width: 100%;
+    }
+    .movie-thumb {
+        width: 100%;
+        height: 60vw;
+    }
+    .wrapper-btn {
+        margin-bottom: 15px;
+    }
+    .title-eng {
+        font-size: 2rem;
+    }
+    // .title-vi {
+    //     font-size: 1.4rem;
+    // }
+
+    .header-content {
+        font-size: 2rem;
+    }
+    .movie-content {
+        margin: 15px 0;
+    }
+    .description {
+        font-size: 1.4rem;
+    }
+    .btn {
+        font-size: 1.4rem;
+    }
+    .episode {
+        .btn {
+            font-size: 1.3rem;
+        }
+    }
 }

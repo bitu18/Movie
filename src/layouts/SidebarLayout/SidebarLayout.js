@@ -24,8 +24,8 @@ function SidebarLayout({ children }) {
             <div className={cx('content-wrapper')}>
                 <div className={cx('grid wide')}>
                     <div className={cx('row')}>
-                        <div className={cx('list-movie col l-9')}>{children}</div>
-                        <div className={cx('sidebar col l-3')}>
+                        <div className={cx('list-movie col l-9 c-12')}>{children}</div>
+                        <div className={cx(`sidebar col l-3 ${isHomePage ? 'c-0' : ''}`)}>
                             <Sidebar />
                         </div>
                     </div>

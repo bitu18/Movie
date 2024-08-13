@@ -61,3 +61,11 @@
         justify-content: flex-start;
     }
 }
+
+// Responsive
+// Mobile
+@media (max-width: 739px) {
+    .header {
+        margin-top: 30px;
+    }
+}
