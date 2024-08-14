@@ -5,7 +5,8 @@
 
 .poster {
     position: relative;
-    height: 17vw;
+    // height: 17vw;
+    height: 218px;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
     z-index: 1; /* Ensure .poster has a z-index */
@@ -84,7 +85,7 @@
 @media (max-width: 739px) {
     .poster {
         height: 50vw;
-        // height: 100%;
+        // height: 218px;
     }
     // .status {
     //     font-size: 1.1rem;

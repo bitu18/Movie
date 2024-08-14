@@ -22,7 +22,7 @@
     & > p {
         font-size: 1.4rem;
         max-width: 90%;
-        margin: 10px 0;
+        margin-top: 10px;
     }
 
     & > a {
@@ -70,7 +70,7 @@
 // Mobile
 @media (max-width: 739px) {
     .wrapper-infor {
-        padding: 40px 20px;
+        padding: 30px 10px;
     }
     .wrapper-text {
         & > p {

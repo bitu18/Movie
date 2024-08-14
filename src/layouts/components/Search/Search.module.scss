@@ -93,7 +93,8 @@ nên .loading sẽ bị ghi đè trong keyframes */
 // Mobile
 @media (max-width: 739px) {
     .search {
-        width: 217px;
+        // width: 644px;
+        width: 50vw;
 
         input {
             font-size: 1.4rem;
