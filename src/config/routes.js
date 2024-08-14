@@ -3,7 +3,7 @@ const routes = {
     search: '/search',
     moive: '/movie',
     seriesMovie: '/seriesMovie',
-    playingNow: '/playingNow',
+    newestMovie: '/newestMovie',
     tvShows: '/tvShows',
     // '?' means it can be or can not be had the slug
     videoDetail: '/videoDetail/:slug/:serverName?/:episodeSlug?',

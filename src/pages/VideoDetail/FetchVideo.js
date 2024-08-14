@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import styles from './VideoDetail.module.scss';
 import Image from '~/components/Image';
 import img from '~/assets/imgs';
+import LoadingSpinner from '~/components/loadingSpinner';
 
 const cx = classNames.bind(styles);
 
@@ -21,9 +22,7 @@ const FetchVideo = memo(
         return (
             <>
                 {loading ? (
-                    <div className={cx('loading-icon')}>
-                        <Image src={img.loading} alt="Loading..." />
-                    </div>
+                    <LoadingSpinner />
                 ) : (
                     <div className={cx('video-play')}>
                         <iframe

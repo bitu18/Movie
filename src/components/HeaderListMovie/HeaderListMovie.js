@@ -21,6 +21,7 @@ function HeaderListMovie({ title, viewAll }) {
     const handleToPage = () => {
         if (trimSpaceBetweenTitle) {
             navigateToPage(`/${trimSpaceBetweenTitle}`);
+            window.scrollTo(0, 0); // Scroll to the top of the page
         }
     };
     return (

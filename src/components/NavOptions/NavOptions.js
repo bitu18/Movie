@@ -97,7 +97,7 @@ function NavOptions({ onHandleMenuChange }) {
                                 <Trans>Home</Trans>
                             </span>
                         </NavLink>
-                        <NavLink className={(nav) => cx('nav-item', { active: nav.isActive })} to={routes.playingNow}>
+                        <NavLink className={(nav) => cx('nav-item', { active: nav.isActive })} to={routes.newestMovie}>
                             <span className={cx('title')}>
                                 <Trans>Newest Movie</Trans>
                             </span>

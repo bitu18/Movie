@@ -1,0 +1,28 @@
+.loading {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.loading-icon > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    // transform: translate(-50%, -50%);
+    width: 8%;
+    animation: spinnerMovie 0.8s infinite;
+}
+
+// Add translate(-50%, -50%) same obove because of animation overwrites
+@keyframes spinnerMovie {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

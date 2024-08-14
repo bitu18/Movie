@@ -78,7 +78,7 @@ const Button = forwardRef(
 );
 
 Button.propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     to: PropTypes.string,
     link: PropTypes.string,
     primary: PropTypes.bool,

@@ -1,11 +1,11 @@
 import classNames from 'classnames/bind';
 
-import styles from './PlayingNow.module.scss';
+import styles from './NewestMovie.module.scss';
 import FetchDataMovie from '~/components/FetchDataMovie';
 
 const cx = classNames.bind(styles);
-function PlayingNow() {
+function NewestMovie() {
     return <FetchDataMovie title="Newest Movie" slug="phim-dang-chieu" />;
 }
 
-export default PlayingNow;
+export default NewestMovie;

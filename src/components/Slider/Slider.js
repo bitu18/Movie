@@ -66,8 +66,8 @@ function Slider() {
         <div className={cx('slider-wrapper')}>
             <swiper-container
                 style={{ '--swiper-navigation-color': '#fff' }}
-                // slides-per-view="3"
-                // space-between="20"
+                slides-per-view="3"
+                space-between="20"
                 center-slides="true"
                 scrollbar-clickable="true"
                 navigation="true"

@@ -1,6 +1,3 @@
-import Tippy from '@tippyjs/react/headless';
-import { faSortDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import { Trans } from 'react-i18next';
 
@@ -114,7 +111,7 @@ function Navigation() {
                         </Tippy>
                     </div> */}
 
-                    <NavLink className={(nav) => cx('nav-item', { active: nav.isActive })} to={routes.playingNow}>
+                    <NavLink className={(nav) => cx('nav-item', { active: nav.isActive })} to={routes.newestMovie}>
                         <span className={cx('title')}>
                             <Trans>Newest Movie</Trans>
                         </span>

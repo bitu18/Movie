@@ -1,24 +1,27 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { publicRoutes } from '~/routes';
 import MainLayout from '~/layouts';
 import FormProvider from './store';
-import { useForm, useOptions } from './store';
-import Register from './layouts/components/PopperForm/FormType/Register';
-import { SignIn } from './layouts/components/PopperForm/FormType';
-import NavOptions from './components/NavOptions';
+import FormType from './store/formType';
+import Options from './store/optionMobile';
+import ScrollTop from '~/components/scrollToTop';
 
-function FormWrapper() {
-    const { showForm, formType } = useForm();
-    if (!showForm) return null;
-    return formType === 'register' ? <Register /> : <SignIn />;
-}
-function Options() {
-    const { showMobileOptions } = useOptions();
-    return showMobileOptions && <NavOptions />;
-}
 function App() {
+    const [showScrollTop, setShowScrollTop] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowScrollTop(window.scrollY >= 400);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    });
     return (
         <FormProvider>
             <BrowserRouter>
@@ -41,8 +44,10 @@ function App() {
                             );
                         })}
                     </Routes>
-                    <FormWrapper />
+                    <FormType />
                     <Options />
+
+                    {showScrollTop && <ScrollTop />}
                 </div>
             </BrowserRouter>
         </FormProvider>

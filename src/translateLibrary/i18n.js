@@ -60,7 +60,7 @@ i18n.use(LanguageDetector)
 
                     // Navigation
                     Home: 'Trang Chủ',
-                    'Newest Movie': 'Phim Mới Nhất',
+                    // 'Newest Movie': 'Phim Mới Nhất',
                     Movie: 'Phim Lẻ',
                     'Series Movie': 'Phim Bộ',
                     'TV Shows': 'Phim Truyền Hình',

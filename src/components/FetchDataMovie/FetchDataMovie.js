@@ -10,6 +10,7 @@ import Movie from '~/components/Movie';
 import Sort from '~/layouts/components/Sort';
 import Image from '~/components/Image';
 import img from '~/assets/imgs';
+import LoadingSpinner from '../loadingSpinner';
 
 const cx = classNames.bind(styles);
 
@@ -115,13 +116,8 @@ function FetchDataMovie({ title, slug }) {
             </div>
             <Sort showControlSelect={false} moveNextPage={handleMoveNextPage} onHandleSortChange={handleSortChange} />
 
-            {loading && (
-                <div className={cx('loading')}>
-                    <div className={cx('loading-icon')}>
-                        <Image src={img.loading} alt="Loading..." />
-                    </div>
-                </div>
-            )}
+            {/* Loading spinner when the data fetch */}
+            {loading && <LoadingSpinner />}
         </>
     );
 }
