@@ -82,3 +82,11 @@
         display: none;
     }
 }
+
+// Resposive
+// Mobile
+@media (max-width: 739px) {
+    .wrapper {
+        --search-btn-width: 48px;
+    }
+}
