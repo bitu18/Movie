@@ -9,6 +9,7 @@ import * as apiService from '~/apiService';
 import FetchVideo from './FetchVideo';
 import Episodes from './Episodes';
 import { Trans, useTranslation } from 'react-i18next';
+import LoadingSpinner from '~/components/loadingSpinner';
 
 const cx = classNames.bind(styles);
 
@@ -20,8 +21,9 @@ function VideoDetail() {
     const [movieInfor, setMovieInfor] = useState(null);
     const [video, setVideo] = useState(null);
     const [episodeServer, setEpisodeServer] = useState([]);
-    const [activeServer, setActiveServer] = useState(localStorage.getItem('activeServer'));
-    const [activeEpisode, setActiveEpisode] = useState(localStorage.getItem('activeEpisode'));
+    const [activeServer, setActiveServer] = useState();
+    const [activeEpisode, setActiveEpisode] = useState();
+    const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
     const watchRef = useRef();
@@ -43,168 +45,194 @@ function VideoDetail() {
                     setActiveEpisode(defaultEpisode);
                     setVideo(episodes[0].items[0]);
 
-                    navigate(`/videoDetail/${slug}/${defaultServer}/${defaultEpisode}`, { replace: true });
+                    // navigate(`/videoDetail/${slug}/${defaultServer}/${defaultEpisode}`, { replace: true });
                 } else {
                     const currentServer = episodes.find((server) => server.server_name === serverName);
                     const currentEpisode = currentServer.items.find((item) => item.slug === episodeSlug);
                     setVideo(currentEpisode);
                 }
+
+                setLoading(false); // Stop loading once data is fetched
             } catch (err) {
                 console.error('Error:', err);
+                setLoading(false);
             }
         };
 
         fetchData();
-    }, [slug]);
-
-    // Save to local storage
-    useEffect(() => {
-        if (activeServer) {
-            localStorage.setItem('activeServer', activeServer);
-        }
-        if (activeEpisode) {
-            localStorage.setItem('activeEpisode', activeEpisode);
-        }
-    }, [activeEpisode, activeServer]);
+    }, [episodeSlug, serverName, slug]);
 
     const handleScroll = () => {
-        if (watchRef.current) {
-            watchRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
+        setTimeout(() => {
+            if (watchRef.current) {
+                watchRef.current.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 100); // Adjust the timeout duration if needed
     };
 
-    const handleChangeServer = (serverName) => {
-        const newServer = episodeServer.find((server) => server.server_name === serverName);
-        const newEpisode = newServer.items[0];
-        setActiveServer(serverName);
-        setActiveEpisode(newEpisode.slug);
-        setVideo(newEpisode);
+    const handleChangeServer = async (serverName) => {
+        setLoading(true);
+        try {
+            const newServer = episodeServer.find((server) => server.server_name === serverName);
 
-        navigate(`/videoDetail/${movieInfor.slug}/${serverName}/${newEpisode.slug}`);
+            setActiveServer(serverName);
+
+            if (newServer && newServer.items.length > 0) {
+                const newEpisode = newServer.items[0];
+                setActiveEpisode(newEpisode.slug);
+                setVideo(newEpisode);
+
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+
+                // navigate(`/videoDetail/${movieInfor.slug}/${serverName}/${newEpisode.slug}`);
+            }
+        } catch (err) {
+            console.error('Error:', err);
+        } finally {
+            setLoading(false);
+        }
+
         handleScroll();
     };
 
-    const handleChangeItem = (itemSlug) => {
-        const newServer = episodeServer.find((server) => server.server_name === activeServer);
-        const newEpisode = newServer.items.find((item) => item.slug === itemSlug);
-        setActiveEpisode(itemSlug);
-        setVideo(newEpisode);
+    const handleChangeItem = async (itemSlug) => {
+        setLoading(true);
+        try {
+            const newServer = episodeServer.find((server) => server.server_name === activeServer);
+            const newEpisode = newServer.items.find((item) => item.slug === itemSlug);
 
-        navigate(`/videoDetail/${movieInfor.slug}/${activeServer}/${itemSlug}`);
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+
+            setActiveEpisode(itemSlug);
+            setVideo(newEpisode);
+
+            // navigate(`/videoDetail/${movieInfor.slug}/${activeServer}/${itemSlug}`);
+        } catch (err) {
+            console.error('Error:', err);
+        } finally {
+            setLoading(false);
+        }
+
         handleScroll();
     };
 
     return (
         <>
-            <div className={cx('wrapper-movie')}>
-                <div className={cx('movie-poster')}>
-                    <Image src={movieInfor?.thumb_url} alt={movieInfor?.name} className={cx('movie-thumb')} />
-                    <div className={cx('wrapper-btn')}>
-                        <Button border outline className={cx('btn--share')}>
-                            Share
-                        </Button>
-                        <Button border primary onClick={handleScroll}>
-                            Watch
-                        </Button>
+            {loading ? (
+                <LoadingSpinner />
+            ) : (
+                <>
+                    <div className={cx('wrapper-movie')}>
+                        <div className={cx('movie-poster')}>
+                            <Image src={movieInfor?.thumb_url} alt={movieInfor?.name} className={cx('movie-thumb')} />
+                            <div className={cx('wrapper-btn')}>
+                                <Button border outline className={cx('btn--share')}>
+                                    Share
+                                </Button>
+                                <Button border primary onClick={handleScroll}>
+                                    Watch
+                                </Button>
+                            </div>
+                        </div>
+
+                        <div className={cx('movie-infor')}>
+                            <div className={cx('header-infor')}>
+                                {isEnglish ? (
+                                    <>
+                                        <h2 className={cx('title-eng')}>{movieInfor?.original_name}</h2>
+                                        <h3 className={cx('title-vi')}>{movieInfor?.name}</h3>
+                                    </>
+                                ) : (
+                                    <>
+                                        <h2 className={cx('title-eng')}>{movieInfor?.name}</h2>
+                                        <h3 className={cx('title-vi')}>{movieInfor?.original_name}</h3>
+                                    </>
+                                )}
+                            </div>
+
+                            <div className={cx('content')}>
+                                <div className={cx('filed')}>
+                                    <p className={cx('name')}>
+                                        <Trans>Duration</Trans>:
+                                    </p>
+                                    <p className={cx('value')}>{movieInfor?.time}</p>
+                                </div>
+                                <div className={cx('filed')}>
+                                    <p className={cx('name')}>
+                                        <Trans>Year</Trans>:
+                                    </p>
+                                    <p className={cx('value')}>{movieInfor?.category?.['3'].list?.[0]?.name}</p>
+                                </div>
+                                <div className={cx('filed')}>
+                                    <p className={cx('name')}>
+                                        <Trans>Director</Trans>:
+                                    </p>
+                                    <p className={cx('value')}>{movieInfor?.director}</p>
+                                </div>
+                                <div className={cx('filed')}>
+                                    <p className={cx('name')}>
+                                        <Trans>Starring</Trans>:
+                                    </p>
+                                    <p className={cx('value')}>{movieInfor?.casts}</p>
+                                </div>
+                                <div className={cx('filed')}>
+                                    <p className={cx('name')}>
+                                        <Trans>Genre</Trans>:
+                                    </p>
+                                    <p className={cx('value')}>
+                                        {movieInfor?.category?.['2']?.list?.map((item) => item.name).join(', ')}
+                                    </p>
+                                </div>
+                                <div className={cx('filed')}>
+                                    <p className={cx('name')}>
+                                        <Trans>Nation</Trans>:
+                                    </p>
+                                    <p className={cx('value')}>{movieInfor?.category?.['4']?.list?.['0']?.name}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div className={cx('movie-infor')}>
-                    <div className={cx('header-infor')}>
-                        {isEnglish ? (
-                            <>
-                                <h2 className={cx('title-eng')}>{movieInfor?.original_name}</h2>
-                                <h3 className={cx('title-vi')}>{movieInfor?.name}</h3>
-                            </>
-                        ) : (
-                            <>
-                                <h2 className={cx('title-eng')}>{movieInfor?.name}</h2>
-                                <h3 className={cx('title-vi')}>{movieInfor?.original_name}</h3>
-                            </>
-                        )}
+                    <div className={cx('movie-content')}>
+                        <h2 className={cx('header-content', 'front-slash')}>
+                            <Trans>Movie Content</Trans>
+                        </h2>
+                        <p className={cx('description')}>{movieInfor?.description}</p>
                     </div>
 
-                    <div className={cx('content')}>
-                        <div className={cx('filed')}>
-                            <p className={cx('name')}>
-                                <Trans>Duration</Trans>:
-                            </p>
-                            <p className={cx('value')}>{movieInfor?.time}</p>
+                    <div className={cx('movie-video')}>
+                        <h2 className={cx('header-content', 'front-slash')}>
+                            <Trans>Movie Video</Trans>
+                        </h2>
+                        <div ref={watchRef} className={cx('header-infor')}>
+                            {isEnglish ? (
+                                <>
+                                    <h2 className={cx('title-eng')}>{movieInfor?.original_name}</h2>
+                                    <h3 className={cx('title-vi')}>{movieInfor?.name}</h3>
+                                </>
+                            ) : (
+                                <>
+                                    <h2 className={cx('title-eng')}>{movieInfor?.name}</h2>
+                                    <h3 className={cx('title-vi')}>{movieInfor?.original_name}</h3>
+                                </>
+                            )}
                         </div>
-                        <div className={cx('filed')}>
-                            <p className={cx('name')}>
-                                <Trans>Year</Trans>:
-                            </p>
-                            <p className={cx('value')}>{movieInfor?.category?.['3'].list?.[0]?.name}</p>
-                        </div>
-                        <div className={cx('filed')}>
-                            <p className={cx('name')}>
-                                <Trans>Director</Trans>:
-                            </p>
-                            <p className={cx('value')}>{movieInfor?.director}</p>
-                        </div>
-                        <div className={cx('filed')}>
-                            <p className={cx('name')}>
-                                <Trans>Starring</Trans>:
-                            </p>
-                            <p className={cx('value')}>{movieInfor?.casts}</p>
-                        </div>
-                        <div className={cx('filed')}>
-                            <p className={cx('name')}>
-                                <Trans>Genre</Trans>:
-                            </p>
-                            <p className={cx('value')}>
-                                {movieInfor?.category?.['2']?.list?.map((item) => item.name).join(', ')}
-                            </p>
-                        </div>
-                        <div className={cx('filed')}>
-                            <p className={cx('name')}>
-                                <Trans>Nation</Trans>:
-                            </p>
-                            <p className={cx('value')}>{movieInfor?.category?.['4']?.list?.['0']?.name}</p>
-                        </div>
+
+                        {/* Fetch Video */}
+                        <FetchVideo movieDetail={video} loading={loading} setLoading={setLoading} />
                     </div>
-                </div>
-            </div>
 
-            <div className={cx('movie-content')}>
-                <h2 className={cx('header-content', 'front-slash')}>
-                    <Trans>Movie Content</Trans>
-                </h2>
-                <p className={cx('description')}>{movieInfor?.description}</p>
-            </div>
-
-            <div className={cx('movie-video')}>
-                <h2 className={cx('header-content', 'front-slash')}>
-                    <Trans>Movie Video</Trans>
-                </h2>
-                <div ref={watchRef} className={cx('header-infor')}>
-                    {isEnglish ? (
-                        <>
-                            <h2 className={cx('title-eng')}>{movieInfor?.original_name}</h2>
-                            <h3 className={cx('title-vi')}>{movieInfor?.name}</h3>
-                        </>
-                    ) : (
-                        <>
-                            <h2 className={cx('title-eng')}>{movieInfor?.name}</h2>
-                            <h3 className={cx('title-vi')}>{movieInfor?.original_name}</h3>
-                        </>
-                    )}
-                </div>
-
-                {/* Fetch Video */}
-                <FetchVideo movieDetail={video} />
-            </div>
-
-            <Episodes
-                movieInfor={movieInfor}
-                episodeServer={episodeServer}
-                activeServer={activeServer}
-                activeEpisode={activeEpisode}
-                onHandleChangeServer={handleChangeServer}
-                onHandleChangeItem={handleChangeItem}
-                onHandleScroll={handleScroll}
-            />
+                    <Episodes
+                        movieInfor={movieInfor}
+                        episodeServer={episodeServer}
+                        activeServer={activeServer}
+                        activeEpisode={activeEpisode}
+                        onHandleChangeServer={handleChangeServer}
+                        onHandleChangeItem={handleChangeItem}
+                        onHandleScroll={handleScroll}
+                    />
+                </>
+            )}
         </>
     );
 }

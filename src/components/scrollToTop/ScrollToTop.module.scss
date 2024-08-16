@@ -1,13 +1,15 @@
-// SrollTop
-.sroll-top {
+.icon-top {
     position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 999;
-}
-.icon-top {
-    font-size: 2.5rem;
+    font-size: 3rem;
     border-radius: 99px;
-    // min-width: 70px;
     padding: 6px 0px 6px 7px;
+}
+
+@media (max-width: 739px) {
+    .icon-top {
+        font-size: 3.5rem;
+    }
 }

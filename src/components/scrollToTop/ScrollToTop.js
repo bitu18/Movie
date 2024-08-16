@@ -9,15 +9,13 @@ const cx = classNames.bind(styles);
 
 function ScrollToTop() {
     return (
-        <div className={cx('sroll-top')}>
-            <Button
-                primary
-                small
-                className={cx('icon-top')}
-                leftIcon={<FontAwesomeIcon icon={faCircleUp} className={cx('icon')} />}
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            />
-        </div>
+        <Button
+            primary
+            small
+            className={cx('icon-top')}
+            leftIcon={<FontAwesomeIcon icon={faCircleUp} />}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        />
     );
 }
 

@@ -23,7 +23,7 @@ function Episodes({
                 {episodeServer.length > 0 &&
                     episodeServer.map((server) => (
                         <NavLink
-                            to={`/videoDetail/${movieInfor.slug}/${server.server_name}`}
+                            // to={`/videoDetail/${movieInfor.slug}/${server.server_name}`}
                             className={(nav) => cx('btn', { active: activeServer === server.server_name && 'active' })}
                             onClick={() => {
                                 onHandleChangeServer(server.server_name);
@@ -43,7 +43,7 @@ function Episodes({
                     .find((server) => server.server_name === activeServer)
                     ?.items.map((item) => (
                         <NavLink
-                            to={`/videoDetail/${movieInfor.slug}/${activeServer}/${item.slug}`}
+                            // to={`/videoDetail/${movieInfor.slug}/${activeServer}/${item.slug}`}
                             className={(nav) => cx('btn', { active: activeEpisode === item.slug && 'active' })}
                             onClick={() => {
                                 onHandleChangeItem(item.slug);
