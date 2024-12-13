@@ -77,6 +77,16 @@
     margin-right: -10px;
 }
 
+.inactive {
+    // color: var(--gray-color);
+    cursor: not-allowed;
+    background-color: transparent;
+    border: 2px solid var(--white-color);
+    pointer-events: none;
+    opacity: 0.6;
+    // filter: grayscale(100%);
+}
+
 //Responsive
 // Mobile
 @media (max-width: 739px) {

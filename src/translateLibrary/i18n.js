@@ -58,6 +58,16 @@ i18n.use(LanguageDetector)
                     'View Profile': 'Xem hồ sơ',
                     'Log out': 'Đăng xuất',
 
+                    // SignIn/ SignUp
+                    'Sign In': 'Đăng Nhập',
+                    'Sign Up': 'Đăng Ký',
+                    'Welcome Back!': 'Chào mừng bạn trở lại!',
+                    "Let's get started with your account.": 'Hãy bắt đầu tạo tài khoản mới.',
+                    'Already have an account?': 'Bạn đã có tài khoản?',
+                    "Don't have an account?": 'Bạn chưa có tài khoản?',
+                    'Sign in with Google': 'Đăng nhập với Google',
+                    'Sign up with Google': 'Đăng ký với Google',
+
                     // Navigation
                     Home: 'Trang Chủ',
                     // 'Newest Movie': 'Phim Mới Nhất',
@@ -75,6 +85,8 @@ i18n.use(LanguageDetector)
                     'Vietsub + Lồng Tiếng': 'Vietsub + Lồng Tiếng',
                     'Thuyết Minh': 'Thuyết Minh',
                     'Lồng Tiếng': 'Lồng Tiếng',
+                    Server: 'Đổi server',
+                    Episode: 'Tập phim',
 
                     // Year
                     year: 'năm',
@@ -122,8 +134,8 @@ i18n.use(LanguageDetector)
                     // Page
                     'Prev Page': 'Trang trước',
                     'Next Page': 'Trang sau',
-                    Contact: 'Liên Hệ',
-                    Support: 'Hỗ Trợ',
+                    Contact: 'Liên hệ',
+                    Support: 'Hỗ trợ',
 
                     // Movie Detail
                     Duration: 'Thời Lượng',
@@ -141,7 +153,7 @@ i18n.use(LanguageDetector)
                     'Lồng Tiếng #1': 'Lồng Tiếng #1',
 
                     // Footer
-                    'About Us': 'Giới Thiệu',
+                    'About Us': 'Giới thiệu',
                     'is the most watched free TV and movie. Movie sources are compiled from major websites with diverse genres. They are helping users have a great experience with varied and user-friendly interface design.':
                         'là kênh truyền hình và phim miễn phí được xem nhiều nhất. Nguồn phim được biên soạn từ các trang web lớn với nhiều thể loại khác nhau. Chúng giúp người dùng có trải nghiệm tuyệt vời với thiết kế giao diện đa dạng và thân thiện người dùng.',
                 },

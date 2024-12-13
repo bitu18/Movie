@@ -5,6 +5,7 @@ import i18n from './translateLibrary/i18n';
 import App from '~/App';
 import reportWebVitals from './reportWebVitals';
 import { GlobalStyles, Grid } from './components/GlobalCSS';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,7 +13,10 @@ root.render(
         <I18nextProvider i18n={i18n}>
             <GlobalStyles>
                 <Grid>
-                    <App />
+                    <GoogleOAuthProvider clientId="542258222683-k64hdtdjnuefslalovlkq4tvj6e4nodp.apps.googleusercontent.com">
+                        <App />
+                    </GoogleOAuthProvider>
+                    ;
                 </Grid>
             </GlobalStyles>
         </I18nextProvider>

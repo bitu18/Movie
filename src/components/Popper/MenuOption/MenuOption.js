@@ -8,15 +8,19 @@ import MenuItem from './MenuItem';
 import Header from './Header';
 import { useState } from 'react';
 import { useForm } from '~/store';
+import { useNavigate } from 'react-router-dom';
+import routes from '~/config/routes';
 
 const cx = classNames.bind(styles);
 
 function MenuOption({ children, options = [], hideOnClick = false, onChange }) {
     const [history, setHistory] = useState([{ data: options }]);
 
-    const { logOut } = useForm();
+    const { handleLogout } = useForm();
 
     const currentState = history[history.length - 1];
+
+    const navigate = useNavigate();
 
     const renderOptions = () => {
         return currentState.data.map((option, index) => {
@@ -33,7 +37,8 @@ function MenuOption({ children, options = [], hideOnClick = false, onChange }) {
                             onChange(option);
 
                             if (option.title === 'Log out') {
-                                logOut();
+                                handleLogout();
+                                navigate(routes.home);
                             }
                         }
                     }}

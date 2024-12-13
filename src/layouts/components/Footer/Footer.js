@@ -63,14 +63,14 @@ function Footer() {
                                     leftIcon={<FontAwesomeIcon icon={faFileSignature} />}
                                     className={cx('icon')}
                                 >
-                                    Contact Support
+                                    Contact
                                 </Button>
                                 <Button
                                     href="/#"
                                     leftIcon={<FontAwesomeIcon icon={faCircleQuestion} />}
                                     className={cx('icon')}
                                 >
-                                    Help Center
+                                    Help center
                                 </Button>
                             </div>
                         </div>

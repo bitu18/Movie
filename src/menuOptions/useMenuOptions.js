@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 export function useMenuOptions() {
     const { t, i18n } = useTranslation();
-    const { currentUser } = useForm();
+    const { userInfor } = useForm();
     const [selectLanguage, setSelectLanguage] = useState(i18n.language);
 
     // Menu for PC and Tablet
@@ -39,7 +39,7 @@ export function useMenuOptions() {
     ];
 
     const USER_MENU_OPTIONS = (t) => [
-        { leftIcon: <ProfileIcon />, title: 'View profile', to: `/account/@${currentUser?.firstName}` },
+        { leftIcon: <ProfileIcon />, title: 'View profile', to: `/account/@${userInfor?.name}` },
         ...MENU_OPTIONS(t),
         { leftIcon: <LogoutIcon />, title: 'Log out', separate: true },
     ];
@@ -50,7 +50,7 @@ export function useMenuOptions() {
         { title: 'Help center', to: '/feedback' },
     ];
     const MOBILE_USER_MENU_OPTIONS = (t) => [
-        { title: 'View profile', to: `/account/@${currentUser?.firstName}` },
+        { title: 'View profile', to: `/account/@${userInfor?.name}` },
         // ...MOBILE_MENU_OPTIONS(t),
         { title: 'Log out' },
     ];

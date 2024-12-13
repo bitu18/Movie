@@ -82,80 +82,85 @@ const listNation = [
 ];
 
 const cx = classNames.bind(styles);
-const Sort = forwardRef(({ showControlSelect = true, moveNextPage, movePrevPage, onHandleSortChange }, ref) => {
-    const { t } = useTranslation();
+const Sort = forwardRef(
+    (
+        { showControlSelect = true, moveNextPage, movePrevPage, onHandleSortChange, inactiveNextBtn, inactivePrevBtn },
+        ref,
+    ) => {
+        const { t } = useTranslation();
 
-    const handleYearchange = (e) => {
-        onHandleSortChange('year', e.target.value);
-    };
+        const handleYearchange = (e) => {
+            onHandleSortChange('year', e.target.value);
+        };
 
-    const handleGenreChange = (e) => {
-        onHandleSortChange('genre', e.target.value);
-    };
+        const handleGenreChange = (e) => {
+            onHandleSortChange('genre', e.target.value);
+        };
 
-    const handleNationChange = (e) => {
-        onHandleSortChange('nation', e.target.value);
-    };
+        const handleNationChange = (e) => {
+            onHandleSortChange('nation', e.target.value);
+        };
 
-    return (
-        <div ref={ref} className={cx('wrapper')}>
-            {showControlSelect && (
-                <div className={cx('sort-container')}>
-                    <div className={cx('control-select-box')}>
-                        <select onChange={handleYearchange}>
-                            {listYear.map((year, index) => (
-                                <option key={index} value={year.name}>
-                                    <Trans>{year.name}</Trans>
-                                </option>
-                            ))}
-                        </select>
+        return (
+            <div ref={ref} className={cx('wrapper')}>
+                {showControlSelect && (
+                    <div className={cx('sort-container')}>
+                        <div className={cx('control-select-box')}>
+                            <select onChange={handleYearchange}>
+                                {listYear.map((year, index) => (
+                                    <option key={index} value={year.name}>
+                                        <Trans>{year.name}</Trans>
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className={cx('control-select-box')}>
+                            <select onChange={handleGenreChange}>
+                                {listGenre.map((genre, index) => (
+                                    <option key={index} value={genre.slug}>
+                                        <Trans>{genre.name}</Trans>
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className={cx('control-select-box')}>
+                            <select onChange={handleNationChange}>
+                                {listNation.map((nation, index) => (
+                                    <option key={index} value={nation.slug}>
+                                        <Trans>{nation.name}</Trans>
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
+                )}
 
-                    <div className={cx('control-select-box')}>
-                        <select onChange={handleGenreChange}>
-                            {listGenre.map((genre, index) => (
-                                <option key={index} value={genre.slug}>
-                                    <Trans>{genre.name}</Trans>
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-
-                    <div className={cx('control-select-box')}>
-                        <select onChange={handleNationChange}>
-                            {listNation.map((nation, index) => (
-                                <option key={index} value={nation.slug}>
-                                    <Trans>{nation.name}</Trans>
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+                <div className={cx('btn-navigation')}>
+                    <Button
+                        onClick={movePrevPage}
+                        className={cx('btn', inactivePrevBtn && 'inactive')}
+                        leftIcon={<FontAwesomeIcon icon={faCaretLeft} className={cx('icon')} />}
+                    >
+                        <p className={cx('title-prev')}>
+                            <Trans>Prev Page</Trans>
+                        </p>
+                    </Button>
+                    <Button
+                        onClick={moveNextPage}
+                        className={cx('btn', inactiveNextBtn && 'inactive')}
+                        rightIcon={<FontAwesomeIcon icon={faCaretRight} className={cx('icon')} />}
+                    >
+                        <p className={cx('title-next')}>
+                            <Trans>Next Page</Trans>
+                        </p>
+                    </Button>
                 </div>
-            )}
-
-            <div className={cx('btn-navigation')}>
-                <Button
-                    onClick={movePrevPage}
-                    className={cx('btn')}
-                    leftIcon={<FontAwesomeIcon icon={faCaretLeft} className={cx('icon')} />}
-                >
-                    <p className={cx('title-prev')}>
-                        <Trans>Prev Page</Trans>
-                    </p>
-                </Button>
-                <Button
-                    onClick={moveNextPage}
-                    className={cx('btn')}
-                    rightIcon={<FontAwesomeIcon icon={faCaretRight} className={cx('icon')} />}
-                >
-                    <p className={cx('title-next')}>
-                        <Trans>Next Page</Trans>
-                    </p>
-                </Button>
             </div>
-        </div>
-    );
-});
+        );
+    },
+);
 
 Sort.propTypes = {
     showControlSelect: PropTypes.bool,

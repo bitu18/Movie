@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import styles from './VideoDetail.module.scss';
-import Button from '~/components/Button';
 import { Trans } from 'react-i18next';
 
 const cx = classNames.bind(styles);
@@ -19,7 +18,9 @@ function Episodes({
     return (
         <>
             <div className={cx('server')}>
-                <h4 className={cx('text')}>Server</h4>
+                <h4 className={cx('text')}>
+                    <Trans>Server</Trans>
+                </h4>
                 {episodeServer.length > 0 &&
                     episodeServer.map((server) => (
                         <NavLink
@@ -38,7 +39,9 @@ function Episodes({
             </div>
 
             <div className={cx('episode')}>
-                <h4 className={cx('text')}>Episode</h4>
+                <h4 className={cx('text')}>
+                    <Trans>Episode</Trans>
+                </h4>
                 {episodeServer
                     .find((server) => server.server_name === activeServer)
                     ?.items.map((item) => (

@@ -21,7 +21,7 @@ function Header() {
     const { t, i18n } = useTranslation();
     const [selectLanguage, setSelectLanguage] = useState(i18n.language);
 
-    const { handleShowForm, isAuthenticated, currentUser } = useForm();
+    const { handleShowForm, isAuthenticated, userInfor } = useForm();
     const { showMobileOptions, handleShowSideBar, handleHideSideBar } = useOptions();
 
     const { MENU_OPTIONS, USER_MENU_OPTIONS } = useMenuOptions();
@@ -59,13 +59,9 @@ function Header() {
                         {isAuthenticated ? (
                             <>
                                 <h4 className={cx('name-user')}>
-                                    <Trans>Hi</Trans>, {currentUser.firstName}
+                                    <Trans>Hi</Trans>, {userInfor.name}
                                 </h4>
-                                <Image
-                                    className={cx('avatar-user')}
-                                    src="https://v4.ghienphim.me/uploads/KNUzLTcebE6v1Dir7AuGmCRQXMw9OnjH.jpg?v=1624896053"
-                                    alt={currentUser.firstName}
-                                />
+                                <Image className={cx('avatar-user')} src={userInfor.avatar} alt={userInfor.name} />
                             </>
                         ) : (
                             <>

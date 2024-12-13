@@ -1,0 +1,28 @@
+.type-login {
+    display: flex;
+    justify-content: center;
+}
+
+.google-btn {
+    position: relative;
+    justify-content: center;
+    color: var(--black-color);
+    width: 85%;
+    border: 2px solid #dce0e3;
+
+    &:hover {
+        background-color: #dce0e3;
+    }
+}
+.google-img {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@media (max-width: 739px) {
+    .google-btn {
+        width: 90%;
+    }
+}

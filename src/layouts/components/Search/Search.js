@@ -67,13 +67,15 @@ function Search({ data }) {
         setShowResult(false);
     };
 
-    const handleSubmitResult = (e) => {
-        if (e.key === 'Enter' || e.type === 'click') {
-            if (searchValue) {
-                navigateToSearchPage(`videoDetail/${searchValue}`);
-                setShowResult(false);
-            }
-        }
+    const handleClickIconSearch = (e) => {
+        inputRef.current.focus();
+
+        // if (e.key === 'Enter' || e.type === 'click') {
+        //     if (searchValue) {
+        //         navigateToSearchPage(`videoDetail/${searchValue}`);
+        //         setShowResult(false);
+        //     }
+        // }
     };
 
     return (
@@ -96,6 +98,8 @@ function Search({ data }) {
                     </div>
                 )}
                 onClickOutside={handleHideResult}
+                // Disable flipping, ensure dropdown stays where it is
+                flip={false}
             >
                 <div className={cx('search')}>
                     <input
@@ -105,20 +109,20 @@ function Search({ data }) {
                         placeholder={t('Search your movie')}
                         onChange={(e) => setSearchValue(e.target.value.trimStart())}
                         onFocus={() => setShowResult(true)}
-                        onKeyDown={handleSubmitResult}
+                        // onKeyDown={handleSubmitResult}
                     />
 
-                    {!!searchValue && !loading && (
+                    {loading ? (
+                        <FontAwesomeIcon icon={faSpinner} className={cx('loading')} />
+                    ) : searchValue ? (
                         <button className={cx('clear')} onClick={handleClear}>
                             <FontAwesomeIcon icon={faCircleXmark} />
                         </button>
+                    ) : (
+                        <button className={cx('search-btn')} onClick={handleClickIconSearch}>
+                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        </button>
                     )}
-
-                    {loading && <FontAwesomeIcon icon={faSpinner} className={cx('loading')} />}
-
-                    <button className={cx('search-btn')} onClick={handleSubmitResult}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </button>
                 </div>
             </Tippy>
         </div>

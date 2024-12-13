@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import routes from '~/config/routes';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Trans } from 'react-i18next';
 
 import styles from './NavOptions.module.scss';
@@ -18,10 +18,12 @@ const cx = classNames.bind(styles);
 
 function NavOptions({ onHandleMenuChange }) {
     const { t, i18n } = useTranslation();
-    const { handleShowForm, isAuthenticated, currentUser, logOut } = useForm();
+    const { handleShowForm, isAuthenticated, currentUser, handleLogout } = useForm();
     const { showMobileOptions, handleShowSideBar, handleHideSideBar } = useOptions();
 
     const { MOBILE_MENU_OPTIONS, MOBILE_USER_MENU_OPTIONS } = useMenuOptions();
+
+    const navigate = useNavigate();
 
     // Hangle change
     const hangleChangeLanguage = (language) => {
@@ -32,7 +34,8 @@ function NavOptions({ onHandleMenuChange }) {
 
     const handleMenuChange = (menuOption) => {
         if (menuOption.title === 'Log out') {
-            logOut();
+            handleLogout();
+            navigate(routes.home);
         }
     };
 

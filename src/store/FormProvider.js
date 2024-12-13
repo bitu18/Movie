@@ -7,14 +7,14 @@ function FormProvider({ children }) {
     const [formType, setFormType] = useState('register');
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [currentUser, setCurrentUser] = useState(null);
+    const [userInfor, setUserInfor] = useState({});
 
     // Save the logIn or Register to local storage
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem('currentUser'));
         if (storedUser) {
             setIsAuthenticated(true);
-            setCurrentUser(storedUser);
+            setUserInfor(storedUser);
         }
     }, []);
 
@@ -25,6 +25,7 @@ function FormProvider({ children }) {
     };
     const handleHideForm = () => {
         setShowForm(false);
+        document.body.style.overflow = 'unset';
     };
 
     const handleShowSideBar = () => {
@@ -33,47 +34,22 @@ function FormProvider({ children }) {
     };
     const handleHideSideBar = () => {
         setShowMobileOptions(false);
+        document.body.style.overflow = 'unset';
     };
 
-    const register = (userData) => {
-        // Get all users from localStorage
-        const users = JSON.parse(localStorage.getItem('users')) || [];
-        users.push(userData);
-
-        // Save the updated list of users to localStorage
-        localStorage.setItem('users', JSON.stringify(users));
-
-        // Save the current user
-        localStorage.setItem('currentUser', JSON.stringify(userData));
+    const handleLogin = (user) => {
+        localStorage.setItem('currentUser', JSON.stringify(user));
         setIsAuthenticated(true);
-        setCurrentUser(userData);
+        // window.location.reload();
+        setUserInfor(user);
         handleHideForm();
-        window.location.reload();
     };
 
-    const logIn = (credential, setErrorMessage) => {
-        // Get all users from localStorage
-        const users = JSON.parse(localStorage.getItem('users')) || [];
-        const storedUser = users.find(
-            (user) => user.email === credential.email && user.password === credential.password,
-        );
-
-        if (storedUser) {
-            localStorage.setItem('currentUser', JSON.stringify(storedUser));
-            setIsAuthenticated(true);
-            setCurrentUser(storedUser);
-            handleHideForm();
-            window.location.reload(); // Reload after setting the user data
-        } else {
-            setErrorMessage({ email: '', password: 'The password is not correct' });
-        }
-    };
-
-    const logOut = () => {
+    const handleLogout = () => {
         localStorage.removeItem('currentUser');
         setIsAuthenticated(false);
-        setCurrentUser(null);
-        window.location.reload();
+        // window.location.reload();
+        setUserInfor(null);
     };
 
     return (
@@ -86,11 +62,11 @@ function FormProvider({ children }) {
                 showMobileOptions,
                 handleShowSideBar,
                 handleHideSideBar,
-                register,
-                logIn,
-                logOut,
                 isAuthenticated,
-                currentUser,
+                userInfor,
+                setUserInfor,
+                handleLogin,
+                handleLogout,
             }}
         >
             {children}

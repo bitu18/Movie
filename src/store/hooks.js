@@ -11,7 +11,10 @@ export const useForm = () => {
         logIn,
         logOut,
         isAuthenticated,
-        currentUser,
+        userInfor,
+        setUserInfor,
+        handleLogin,
+        handleLogout,
     } = useContext(Context);
     return {
         showForm,
@@ -22,7 +25,10 @@ export const useForm = () => {
         logIn,
         logOut,
         isAuthenticated,
-        currentUser,
+        userInfor,
+        setUserInfor,
+        handleLogin,
+        handleLogout,
     };
 };
 

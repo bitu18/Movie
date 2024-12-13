@@ -9,59 +9,63 @@ import PopperForm from '../PopperForm';
 import FormItem from './FormItem';
 import Header from './Header';
 import { validateField } from '~/validate';
+import LoginButton from '~/components/LoginButton';
+import { useLoginByGoogle } from '~/hooks';
+import { Trans } from 'react-i18next';
 
 const cx = classNames.bind(styles);
 function Register() {
-    const { handleShowForm, handleHideForm, register } = useForm();
+    const { handleShowForm, handleHideForm } = useForm();
+    const signUpByGoogle = useLoginByGoogle();
 
-    const [formUser, setFormUser] = useState({ firstName: '', email: '', password: '', confirmPassword: '' });
-    const [showError, setShowError] = useState({ firstName: '', email: '', password: '', confirmPassword: '' });
-    const [touched, setTouched] = useState({ firstName: false, email: false, password: false, confirmPassword: false });
+    // const [formUser, setFormUser] = useState({ firstName: '', email: '', password: '', confirmPassword: '' });
+    // const [showError, setShowError] = useState({ firstName: '', email: '', password: '', confirmPassword: '' });
+    // const [touched, setTouched] = useState({ firstName: false, email: false, password: false, confirmPassword: false });
 
-    const handleGetInforUser = (e) => {
-        const { name, value } = e.target;
-        setFormUser((prevState) => ({ ...prevState, [name]: value }));
+    // const handleGetInforUser = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormUser((prevState) => ({ ...prevState, [name]: value }));
 
-        // Clear error messages when user types
-        if (touched[name]) {
-            setShowError((prevErrors) => ({ ...prevErrors, [name]: validateField(name, value, formUser) }));
-        }
-    };
+    //     // Clear error messages when user types
+    //     if (touched[name]) {
+    //         setShowError((prevErrors) => ({ ...prevErrors, [name]: validateField(name, value, formUser) }));
+    //     }
+    // };
 
-    const handleBlurOut = (e) => {
-        const { name, value } = e.target;
+    // const handleBlurOut = (e) => {
+    //     const { name, value } = e.target;
 
-        setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
+    //     setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
 
-        // Set error messages when the field loses focus
-        setShowError((prevErrors) => ({ ...prevErrors, [name]: validateField(name, value, formUser) }));
-    };
+    //     // Set error messages when the field loses focus
+    //     setShowError((prevErrors) => ({ ...prevErrors, [name]: validateField(name, value, formUser) }));
+    // };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
 
-        // Final validation before submission
-        const ConfirmErrors = {
-            firstName: validateField('firstName', formUser.firstName, formUser),
-            email: validateField('email', formUser.email, formUser),
-            password: validateField('password', formUser.password, formUser),
-            confirmPassword: validateField('confirmPassword', formUser.confirmPassword, formUser),
-        };
+    //     // Final validation before submission
+    //     const ConfirmErrors = {
+    //         firstName: validateField('firstName', formUser.firstName, formUser),
+    //         email: validateField('email', formUser.email, formUser),
+    //         password: validateField('password', formUser.password, formUser),
+    //         confirmPassword: validateField('confirmPassword', formUser.confirmPassword, formUser),
+    //     };
 
-        setShowError(ConfirmErrors);
+    //     setShowError(ConfirmErrors);
 
-        const hasNoError = Object.values(ConfirmErrors).every((error) => error === undefined);
+    //     const hasNoError = Object.values(ConfirmErrors).every((error) => error === undefined);
 
-        if (hasNoError) {
-            register(formUser);
-        }
-    };
+    //     if (hasNoError) {
+    //         register(formUser);
+    //     }
+    // };
 
     return (
         <PopperForm onHandleHideForm={handleHideForm}>
-            <Header title="Sign Up" des="Let's get started with your account" />
+            <Header title="Sign Up" des="Let's get started with your account." />
 
-            <form onSubmit={handleSubmit}>
+            {/* <form onSubmit={handleSubmit}>
                 <FormItem
                     title="First Name"
                     name="firstName"
@@ -106,13 +110,15 @@ function Register() {
                 <Button primary className={cx('submit')} onClick={handleSubmit}>
                     Create an Account
                 </Button>
-            </form>
+            </form> */}
+
+            <LoginButton signUpByGoogle={signUpByGoogle} />
 
             <div className={cx('already')}>
                 <span>
-                    Already have an account?
-                    <Button text className={cx('sign-up-btn')} onClick={() => handleShowForm('logIn')}>
-                        Sign In
+                    <Trans>Already have an account?</Trans>
+                    <Button text className={cx('sign-up-btn')} onClick={() => handleShowForm('signIn')}>
+                        <Trans>Sign In</Trans>
                     </Button>
                 </span>
             </div>

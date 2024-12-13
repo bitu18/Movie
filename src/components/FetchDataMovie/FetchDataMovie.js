@@ -19,13 +19,26 @@ function FetchDataMovie({ title, slug }) {
     const [currentPageNumb, setCurrentPageNumb] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [filterMovies, setFilterMovies] = useState({ type: '', value: '', slug });
+    const [inactiveNextBtn, setInactiveNextBtn] = useState(false);
+    const [inactivePrevBtn, setInactivePrevBtn] = useState(false);
 
     const [loading, setLoading] = useState(false);
     const sortRef = useRef(null);
 
+    useEffect(() => {
+        // Update button states when currentPageNumb or totalPages changes
+        setInactiveNextBtn(currentPageNumb >= totalPages);
+        setInactivePrevBtn(currentPageNumb <= 1);
+
+        // if (currentPageNumb >= totalPages) {
+        //     setInactiveNextBtn(true);
+        // } else if (currentPageNumb <= 1) {
+        //     setInactiveNextBtn(true);
+        // }
+    }, [currentPageNumb, totalPages]);
+
     const handleMoveNextPage = () => {
-        setLoading(true);
-        setCurrentPageNumb((prev) => (currentPageNumb < totalPages ? prev + 2 : currentPageNumb));
+        setCurrentPageNumb((prev) => (prev < totalPages ? prev + 2 : prev));
 
         if (sortRef.current) {
             sortRef.current.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
@@ -33,8 +46,7 @@ function FetchDataMovie({ title, slug }) {
     };
 
     const handleMovePrevPage = () => {
-        setLoading(true);
-        setCurrentPageNumb((prev) => (currentPageNumb > 1 ? prev - 2 : 1));
+        setCurrentPageNumb((prev) => (prev > 1 ? prev - 2 : prev));
 
         if (sortRef.current) {
             sortRef.current.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
@@ -102,6 +114,8 @@ function FetchDataMovie({ title, slug }) {
                 ref={sortRef}
                 moveNextPage={handleMoveNextPage}
                 movePrevPage={handleMovePrevPage}
+                inactiveNextBtn={inactiveNextBtn}
+                inactivePrevBtn={inactivePrevBtn}
                 onHandleSortChange={handleSortChange}
             />
             <div className={cx('wrapper')}>
@@ -114,7 +128,14 @@ function FetchDataMovie({ title, slug }) {
                     ))}
                 </div>
             </div>
-            <Sort showControlSelect={false} moveNextPage={handleMoveNextPage} onHandleSortChange={handleSortChange} />
+            <Sort
+                showControlSelect={false}
+                moveNextPage={handleMoveNextPage}
+                movePrevPage={handleMovePrevPage}
+                inactiveNextBtn={inactiveNextBtn}
+                inactivePrevBtn={inactivePrevBtn}
+                onHandleSortChange={handleSortChange}
+            />
 
             {/* Loading spinner when the data fetch */}
             {loading && <LoadingSpinner />}
