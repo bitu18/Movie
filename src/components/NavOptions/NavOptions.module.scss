@@ -64,13 +64,22 @@
 
 .list {
     border-bottom: 1px solid #363636;
-    padding-bottom: 25px;
+    padding-bottom: 20px;
 }
 
 .form {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.name-user {
+}
+.avatar-user {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 6px;
 }
 
 .btn-login {
@@ -93,7 +102,7 @@
 .nav-item {
     font-size: 1.4rem;
     justify-content: flex-start;
-    padding: 10px 0;
+    padding: 8px 0;
     font-weight: 400;
 
     &:hover {

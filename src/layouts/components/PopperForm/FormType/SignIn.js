@@ -61,7 +61,7 @@ function SignIn() {
 
     return (
         <PopperForm onHandleHideForm={handleHideForm}>
-            <Header title="Sign In" des="Welcome Back!" />
+            <Header title="Sign in" des="Welcome Back!" />
 
             {/* <form onSubmit={handleSubmit}>
                 <FormItem
@@ -93,11 +93,11 @@ function SignIn() {
             <LoginButton signInByGoogle={signInByGoogle} />
 
             <div className={cx('already')}>
-                <span>
-                    <Trans>Don't have an account?</Trans>
-                    <Button text className={cx('sign-up-btn')} onClick={() => handleShowForm('register')}>
-                        <Trans>Sign Up</Trans>
-                    </Button>
+                <span className={cx('account')}>
+                    <Trans>Don't have an account? </Trans>
+                    <button className={cx('sign-up-btn')} onClick={() => handleShowForm('register')}>
+                        <Trans>Sign up</Trans>
+                    </button>
                 </span>
             </div>
         </PopperForm>

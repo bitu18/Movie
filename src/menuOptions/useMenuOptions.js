@@ -1,5 +1,3 @@
-// src/menuOptions/useMenuOptions.js
-
 import { HelpIcon, LanguageIcon, LogoutIcon, ProfileIcon, SettingsIcon } from '~/components/Icon/Icon';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -51,7 +49,7 @@ export function useMenuOptions() {
     ];
     const MOBILE_USER_MENU_OPTIONS = (t) => [
         { title: 'View profile', to: `/account/@${userInfor?.name}` },
-        // ...MOBILE_MENU_OPTIONS(t),
+        ...MOBILE_MENU_OPTIONS(t),
         { title: 'Log out' },
     ];
 

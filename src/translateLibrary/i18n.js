@@ -59,8 +59,8 @@ i18n.use(LanguageDetector)
                     'Log out': 'Đăng xuất',
 
                     // SignIn/ SignUp
-                    'Sign In': 'Đăng Nhập',
-                    'Sign Up': 'Đăng Ký',
+                    'Sign in': 'Đăng nhập',
+                    'Sign up': 'Đăng ký',
                     'Welcome Back!': 'Chào mừng bạn trở lại!',
                     "Let's get started with your account.": 'Hãy bắt đầu tạo tài khoản mới.',
                     'Already have an account?': 'Bạn đã có tài khoản?',

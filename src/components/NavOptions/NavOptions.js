@@ -13,12 +13,13 @@ import Button from '../Button';
 import { useMenuOptions } from '~/menuOptions/useMenuOptions';
 import { useTranslation } from 'react-i18next';
 import Header from './Header';
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
 function NavOptions({ onHandleMenuChange }) {
     const { t, i18n } = useTranslation();
-    const { handleShowForm, isAuthenticated, currentUser, handleLogout } = useForm();
+    const { handleShowForm, isAuthenticated, userInfor, handleLogout } = useForm();
     const { showMobileOptions, handleShowSideBar, handleHideSideBar } = useOptions();
 
     const { MOBILE_MENU_OPTIONS, MOBILE_USER_MENU_OPTIONS } = useMenuOptions();
@@ -46,8 +47,9 @@ function NavOptions({ onHandleMenuChange }) {
                     <div className={cx('form')}>
                         {isAuthenticated ? (
                             <>
+                                <Image className={cx('avatar-user')} src={userInfor.avatar} alt={userInfor.name} />
                                 <h4 className={cx('name-user')}>
-                                    <Trans>Hi</Trans>, {currentUser.firstName}
+                                    <Trans>Hi</Trans>, {userInfor.name}
                                 </h4>
                             </>
                         ) : (

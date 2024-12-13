@@ -63,7 +63,7 @@ function Register() {
 
     return (
         <PopperForm onHandleHideForm={handleHideForm}>
-            <Header title="Sign Up" des="Let's get started with your account." />
+            <Header title="Sign up" des="Let's get started with your account." />
 
             {/* <form onSubmit={handleSubmit}>
                 <FormItem
@@ -115,11 +115,11 @@ function Register() {
             <LoginButton signUpByGoogle={signUpByGoogle} />
 
             <div className={cx('already')}>
-                <span>
-                    <Trans>Already have an account?</Trans>
-                    <Button text className={cx('sign-up-btn')} onClick={() => handleShowForm('signIn')}>
-                        <Trans>Sign In</Trans>
-                    </Button>
+                <span className={cx('account')}>
+                    <Trans>Already have an account? </Trans>
+                    <button className={cx('sign-up-btn')} onClick={() => handleShowForm('signIn')}>
+                        <Trans>Sign in</Trans>
+                    </button>
                 </span>
             </div>
         </PopperForm>
