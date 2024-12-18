@@ -6,11 +6,16 @@ import PropTypes from 'prop-types';
 import styles from './Movie.module.scss';
 import Image from '~/components/Image';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 function Movie({ seriesMovie }) {
     const { t, i18n } = useTranslation();
     const isEnglish = i18n.language === 'en';
+
+    const englishTitle = isEnglish ? seriesMovie.original_name : seriesMovie.name;
+    const vietnameseTitle = isEnglish ? seriesMovie.name : seriesMovie.original_name;
+
     return (
         <a href={`/videoDetail/${seriesMovie.slug}`} className={cx('link')}>
             <div className={cx('poster')}>
@@ -20,17 +25,8 @@ function Movie({ seriesMovie }) {
             </div>
 
             <div className={cx('title')}>
-                {isEnglish ? (
-                    <>
-                        <h3 className={cx('title--eng')}>{seriesMovie.original_name}</h3>
-                        <p className={cx('title--vi')}>{seriesMovie.name}</p>
-                    </>
-                ) : (
-                    <>
-                        <h3 className={cx('title--eng')}>{seriesMovie.name}</h3>
-                        <p className={cx('title--vi')}>{seriesMovie.original_name}</p>
-                    </>
-                )}
+                <h3 className={cx('title--eng')}>{englishTitle}</h3>
+                <p className={cx('title--vi')}>{vietnameseTitle}</p>
             </div>
         </a>
     );

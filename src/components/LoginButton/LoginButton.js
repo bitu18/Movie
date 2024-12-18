@@ -22,7 +22,8 @@ function LoginButton({ signInByGoogle, signUpByGoogle }) {
 }
 
 LoginButton.propTypes = {
-    loginByGoogle: PropTypes.func.isRequired,
+    signInByGoogle: PropTypes.func,
+    signUpByGoogle: PropTypes.func,
 };
 
 export default LoginButton;

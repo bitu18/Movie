@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
@@ -41,5 +42,10 @@ function HeaderListMovie({ title, viewAll }) {
         </header>
     );
 }
+
+HeaderListMovie.propTypes = {
+    title: PropTypes.string.isRequired,
+    viewAll: PropTypes.bool,
+};
 
 export default HeaderListMovie;

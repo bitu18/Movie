@@ -45,6 +45,7 @@
     color: var(--white-color);
 
     &:hover {
+        border-width: 2px;
         border-color: #e0950f;
         background-color: rgba($color: #e0950f, $alpha: 0.9);
     }

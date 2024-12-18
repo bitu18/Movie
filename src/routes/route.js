@@ -9,6 +9,7 @@ import TvShows from '~/pages/TvShows';
 import NewestMovie from '~/pages/NewestMovie';
 import VideoDetail from '~/pages/VideoDetail';
 import Account from '~/pages/Account';
+import Watchlist from '~/pages/Watchlist';
 import config from '~/config';
 
 const publicRoutes = [
@@ -20,6 +21,7 @@ const publicRoutes = [
     { path: config.routes.tvShows, component: TvShows },
     { path: config.routes.videoDetail, component: VideoDetail, layout: SidebarLayout },
     { path: config.routes.account, component: Account },
+    { path: config.routes.watchlist, component: Watchlist },
 ];
 
 const privateRoutes = [];

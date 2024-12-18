@@ -1,6 +1,10 @@
 import classNames from 'classnames/bind';
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Trans, useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookmark as faBookmarkSolid } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark as faBookmarkRegular, faCirclePlay } from '@fortawesome/free-regular-svg-icons';
 
 import styles from './VideoDetail.module.scss';
 import Image from '~/components/Image';
@@ -8,8 +12,8 @@ import Button from '~/components/Button';
 import * as apiService from '~/apiService';
 import FetchVideo from './FetchVideo';
 import Episodes from './Episodes';
-import { Trans, useTranslation } from 'react-i18next';
 import LoadingSpinner from '~/components/loadingSpinner';
+import { useWatchlist } from '~/store';
 
 const cx = classNames.bind(styles);
 
@@ -18,6 +22,8 @@ function VideoDetail() {
     const isEnglish = i18n.language === 'en';
 
     const { slug, serverName, episodeSlug } = useParams(); // Get slug from URL
+    const { watchlist, isMarked, setIsMarked, handleAddWatchlist, handleRemoveWatchlist } = useWatchlist();
+
     const [movieInfor, setMovieInfor] = useState(null);
     const [video, setVideo] = useState(null);
     const [episodeServer, setEpisodeServer] = useState([]);
@@ -25,7 +31,6 @@ function VideoDetail() {
     const [activeEpisode, setActiveEpisode] = useState();
     const [loading, setLoading] = useState(true);
 
-    const navigate = useNavigate();
     const watchRef = useRef();
 
     // Get API
@@ -37,22 +42,17 @@ function VideoDetail() {
                 setMovieInfor(res.movie);
                 setEpisodeServer(episodes);
 
-                // Default to the first server & episode if none are active or if it's a new movie
-                if (!activeServer || !activeEpisode || activeServer !== serverName || activeEpisode !== episodeSlug) {
-                    const defaultServer = episodes[0].server_name;
-                    const defaultEpisode = episodes[0].items[0].slug;
-                    setActiveServer(defaultServer);
-                    setActiveEpisode(defaultEpisode);
-                    setVideo(episodes[0].items[0]);
+                const defaultServer = episodes[0]?.server_name;
+                const defaultEpisode = episodes[0]?.items[0]?.slug;
 
-                    // navigate(`/videoDetail/${slug}/${defaultServer}/${defaultEpisode}`, { replace: true });
-                } else {
-                    const currentServer = episodes.find((server) => server.server_name === serverName);
-                    const currentEpisode = currentServer.items.find((item) => item.slug === episodeSlug);
-                    setVideo(currentEpisode);
-                }
+                const newServer = episodes.find((server) => server.server_name === serverName) || episodes[0];
+                const newEpisode = newServer?.items.find((item) => item.slug === episodeSlug) || newServer?.items[0];
 
-                setLoading(false); // Stop loading once data is fetched
+                setActiveServer(newServer.server_name);
+                setActiveEpisode(newEpisode.slug);
+                setVideo(newEpisode);
+
+                setLoading(false);
             } catch (err) {
                 console.error('Error:', err);
                 setLoading(false);
@@ -60,7 +60,10 @@ function VideoDetail() {
         };
 
         fetchData();
-    }, [episodeSlug, serverName, slug]);
+    }, [slug, serverName, episodeSlug]);
+
+    const englishTitle = isEnglish ? movieInfor?.original_name : movieInfor?.name;
+    const vietnameseTitle = isEnglish ? movieInfor?.name : movieInfor?.original_name;
 
     const handleScroll = () => {
         setTimeout(() => {
@@ -83,8 +86,6 @@ function VideoDetail() {
                 setVideo(newEpisode);
 
                 await new Promise((resolve) => setTimeout(resolve, 1000));
-
-                // navigate(`/videoDetail/${movieInfor.slug}/${serverName}/${newEpisode.slug}`);
             }
         } catch (err) {
             console.error('Error:', err);
@@ -105,8 +106,6 @@ function VideoDetail() {
 
             setActiveEpisode(itemSlug);
             setVideo(newEpisode);
-
-            // navigate(`/videoDetail/${movieInfor.slug}/${activeServer}/${itemSlug}`);
         } catch (err) {
             console.error('Error:', err);
         } finally {
@@ -114,6 +113,17 @@ function VideoDetail() {
         }
 
         handleScroll();
+    };
+
+    const handleMovieMarked = () => {
+        // Check if the current movie is already in the watchlist
+        const isInWatchlist = watchlist.some((item) => item.id === movieInfor.id);
+
+        if (isInWatchlist) {
+            handleRemoveWatchlist(movieInfor);
+        } else {
+            handleAddWatchlist(movieInfor);
+        }
     };
 
     return (
@@ -126,28 +136,37 @@ function VideoDetail() {
                         <div className={cx('movie-poster')}>
                             <Image src={movieInfor?.thumb_url} alt={movieInfor?.name} className={cx('movie-thumb')} />
                             <div className={cx('wrapper-btn')}>
-                                <Button border outline className={cx('btn--share')}>
-                                    Share
-                                </Button>
-                                <Button border primary onClick={handleScroll}>
+                                <Button
+                                    border
+                                    primary
+                                    className={cx('btn--play')}
+                                    onClick={handleScroll}
+                                    leftIcon={<FontAwesomeIcon icon={faCirclePlay} className={cx('icon-btn')} />}
+                                >
                                     Watch
+                                </Button>
+                                <Button
+                                    border
+                                    outline
+                                    className={cx('btn--share')}
+                                    leftIcon={
+                                        watchlist.some((item) => item.id === movieInfor.id) ? (
+                                            <FontAwesomeIcon icon={faBookmarkSolid} className={cx('icon-btn')} />
+                                        ) : (
+                                            <FontAwesomeIcon icon={faBookmarkRegular} className={cx('icon-btn')} />
+                                        )
+                                    }
+                                    onClick={handleMovieMarked}
+                                >
+                                    Watch later
                                 </Button>
                             </div>
                         </div>
 
                         <div className={cx('movie-infor')}>
                             <div className={cx('header-infor')}>
-                                {isEnglish ? (
-                                    <>
-                                        <h2 className={cx('title-eng')}>{movieInfor?.original_name}</h2>
-                                        <h3 className={cx('title-vi')}>{movieInfor?.name}</h3>
-                                    </>
-                                ) : (
-                                    <>
-                                        <h2 className={cx('title-eng')}>{movieInfor?.name}</h2>
-                                        <h3 className={cx('title-vi')}>{movieInfor?.original_name}</h3>
-                                    </>
-                                )}
+                                <h2 className={cx('title-eng')}>{englishTitle}</h2>
+                                <h3 className={cx('title-vi')}>{vietnameseTitle}</h3>
                             </div>
 
                             <div className={cx('content')}>
@@ -205,17 +224,8 @@ function VideoDetail() {
                             <Trans>Movie Video</Trans>
                         </h2>
                         <div ref={watchRef} className={cx('header-infor')}>
-                            {isEnglish ? (
-                                <>
-                                    <h2 className={cx('title-eng')}>{movieInfor?.original_name}</h2>
-                                    <h3 className={cx('title-vi')}>{movieInfor?.name}</h3>
-                                </>
-                            ) : (
-                                <>
-                                    <h2 className={cx('title-eng')}>{movieInfor?.name}</h2>
-                                    <h3 className={cx('title-vi')}>{movieInfor?.original_name}</h3>
-                                </>
-                            )}
+                            <h2 className={cx('title-eng')}>{englishTitle}</h2>
+                            <h3 className={cx('title-vi')}>{vietnameseTitle}</h3>
                         </div>
 
                         {/* Fetch Video */}

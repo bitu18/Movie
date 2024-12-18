@@ -144,7 +144,9 @@ i18n.use(LanguageDetector)
                     Starring: 'Diễn viên',
                     Genre: 'Thể loại',
                     Share: 'Chia Sẻ',
-                    Watch: 'Xem Phim',
+                    Watch: 'Xem',
+                    Watchlist: 'Danh sách của tôi',
+                    'Watch later': 'Xem sau',
                     'Movie Content': 'Nội Dung',
                     'Movie Video': 'Chiếu Phim',
                     'Voiceover #1': 'Lồng Tiếng #1',
@@ -152,10 +154,21 @@ i18n.use(LanguageDetector)
                     'Thuyết minh #1': 'Thuyết minh #1',
                     'Lồng Tiếng #1': 'Lồng Tiếng #1',
 
+                    // Watchlist
+                    'Movie list is empty, please choose watch-later to add it to your watchlist':
+                        'Danh sách phim trống, vui lòng chọn xem sau để thêm vào danh sách',
+
+                    // Account
+                    Account: 'Cập nhật tài khoản',
+                    Change: 'Chọn ảnh',
+                    Name: 'Tên',
+                    About: 'Giới thiệu',
+                    Save: 'Lưu lại',
+
                     // Footer
                     'About Us': 'Giới thiệu',
-                    'is the most watched free TV and movie. Movie sources are compiled from major websites with diverse genres. They are helping users have a great experience with varied and user-friendly interface design.':
-                        'là kênh truyền hình và phim miễn phí được xem nhiều nhất. Nguồn phim được biên soạn từ các trang web lớn với nhiều thể loại khác nhau. Chúng giúp người dùng có trải nghiệm tuyệt vời với thiết kế giao diện đa dạng và thân thiện người dùng.',
+                    'is the most watched free TV and movie. Movie sources are compiled from major websites with diverse genres. They are helping users have a great experience with varied and user-friendly interface design':
+                        'là kênh truyền hình và phim miễn phí được xem nhiều nhất. Nguồn phim được biên soạn từ các trang web lớn với nhiều thể loại khác nhau. Chúng giúp người dùng có trải nghiệm tuyệt vời với thiết kế giao diện đa dạng và thân thiện người dùng',
                 },
             },
         },

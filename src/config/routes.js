@@ -8,6 +8,7 @@ const routes = {
     // '?' means it can be or can not be had the slug
     videoDetail: '/videoDetail/:slug/:serverName?/:episodeSlug?',
     account: 'account/:nickname',
+    watchlist: '/watchlist',
 };
 
 export default routes;

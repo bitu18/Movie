@@ -30,8 +30,9 @@ function Footer() {
                                     <Trans>
                                         is the most watched free TV and movie. Movie sources are compiled from major
                                         websites with diverse genres. They are helping users have a great experience
-                                        with varied and user-friendly interface design.
+                                        with varied and user-friendly interface design
                                     </Trans>
+                                    .
                                 </p>
                             </div>
                         </div>

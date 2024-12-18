@@ -37,3 +37,9 @@ export const useOptions = () => {
 
     return { showMobileOptions, handleShowSideBar, handleHideSideBar };
 };
+
+export const useWatchlist = () => {
+    const { watchlist, setWatchlist, handleAddWatchlist, handleRemoveWatchlist, isMarked, setIsMarked } =
+        useContext(Context);
+    return { watchlist, setWatchlist, handleAddWatchlist, handleRemoveWatchlist, isMarked, setIsMarked };
+};

@@ -15,6 +15,7 @@ function useLoginByGoogle() {
                 const user = {
                     name: res.data.name,
                     avatar: res.data.picture,
+                    email: res.data.email,
                 };
                 handleLogin(user);
             } catch (error) {

@@ -9,6 +9,11 @@ function FormProvider({ children }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [userInfor, setUserInfor] = useState({});
 
+    const [isMarked, setIsMarked] = useState(false);
+    const [watchlist, setWatchlist] = useState(() => {
+        return JSON.parse(localStorage.getItem('watchList')) || [];
+    });
+
     // Save the logIn or Register to local storage
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -17,6 +22,23 @@ function FormProvider({ children }) {
             setUserInfor(storedUser);
         }
     }, []);
+
+    // Ensure watchlist is loaded on page load
+    useEffect(() => {
+        if (isAuthenticated) {
+            const storedWatchlist = JSON.parse(localStorage.getItem('watchList')) || [];
+            setWatchlist(storedWatchlist);
+        } else {
+            setWatchlist([]);
+        }
+    }, [isAuthenticated]);
+
+    // Update localStorage whenever watchlist changes
+    useEffect(() => {
+        if (watchlist) {
+            localStorage.setItem('watchList', JSON.stringify(watchlist));
+        }
+    }, [watchlist]); // Run whenever watchlist state changes
 
     const handleShowForm = (type) => {
         setShowForm(true);
@@ -40,7 +62,6 @@ function FormProvider({ children }) {
     const handleLogin = (user) => {
         localStorage.setItem('currentUser', JSON.stringify(user));
         setIsAuthenticated(true);
-        // window.location.reload();
         setUserInfor(user);
         handleHideForm();
     };
@@ -48,8 +69,30 @@ function FormProvider({ children }) {
     const handleLogout = () => {
         localStorage.removeItem('currentUser');
         setIsAuthenticated(false);
-        // window.location.reload();
         setUserInfor(null);
+    };
+
+    // Handle Watchlist functions
+    const handleAddWatchlist = (movie) => {
+        if (!isAuthenticated) {
+            handleShowForm('signIn');
+        } else {
+            setWatchlist((prevWatchlist) => {
+                const alreadyMarked = prevWatchlist.some((item) => item.id === movie.id);
+                if (!alreadyMarked) {
+                    const updateWatchlist = [...prevWatchlist, movie];
+                    return updateWatchlist;
+                }
+                return prevWatchlist;
+            });
+        }
+    };
+
+    const handleRemoveWatchlist = (movie) => {
+        setWatchlist((prevWatchlist) => {
+            const updateWatchlist = prevWatchlist.filter((item) => item.id !== movie.id);
+            return updateWatchlist;
+        });
     };
 
     return (
@@ -67,6 +110,12 @@ function FormProvider({ children }) {
                 setUserInfor,
                 handleLogin,
                 handleLogout,
+                watchlist,
+                setWatchlist,
+                handleAddWatchlist,
+                handleRemoveWatchlist,
+                isMarked,
+                setIsMarked,
             }}
         >
             {children}

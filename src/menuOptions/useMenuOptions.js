@@ -1,5 +1,5 @@
 import { HelpIcon, LanguageIcon, LogoutIcon, ProfileIcon, SettingsIcon } from '~/components/Icon/Icon';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faListCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 import { useForm } from '~/store';
@@ -38,6 +38,7 @@ export function useMenuOptions() {
 
     const USER_MENU_OPTIONS = (t) => [
         { leftIcon: <ProfileIcon />, title: 'View profile', to: `/account/@${userInfor?.name}` },
+        { leftIcon: <FontAwesomeIcon icon={faListCheck} />, title: 'Watchlist', to: '/watchlist' },
         ...MENU_OPTIONS(t),
         { leftIcon: <LogoutIcon />, title: 'Log out', separate: true },
     ];
@@ -48,8 +49,9 @@ export function useMenuOptions() {
         { title: 'Help center', to: '/feedback' },
     ];
     const MOBILE_USER_MENU_OPTIONS = (t) => [
-        { title: 'View profile', to: `/account/@${userInfor?.name}` },
-        ...MOBILE_MENU_OPTIONS(t),
+        { leftIcon: <ProfileIcon />, title: 'View profile', to: `/account/@${userInfor?.name}` },
+        { leftIcon: <FontAwesomeIcon icon={faListCheck} />, title: 'Watchlist', to: '/watchlist' },
+        // ...MOBILE_MENU_OPTIONS(t),
         { title: 'Log out' },
     ];
 
