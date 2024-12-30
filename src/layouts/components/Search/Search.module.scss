@@ -18,7 +18,7 @@
     input {
         flex: 1;
         height: 100%;
-        // padding-right: 40px;
+        padding-right: 42px;
         color: var(--white-color);
         caret-color: var(--primary-color);
         font-size: 1.6rem;
@@ -102,8 +102,9 @@ nên .loading sẽ bị ghi đè trong keyframes */
         width: 50vw;
         padding-left: 12px;
 
-        // input {
-        //     font-size: 1.3rem;
-        // }
+        input {
+            width: 100%;
+            // font-size: 1.3rem;
+        }
     }
 }
