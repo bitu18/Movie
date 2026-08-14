@@ -1,4 +1,4 @@
-import request from '~/untils/httpRequest';
+import request from '~/untils/httpRequest.js';
 
 export const typesList = [
     {

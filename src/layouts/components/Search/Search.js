@@ -99,7 +99,7 @@ function Search({ data }) {
                 )}
                 onClickOutside={handleHideResult}
                 // Disable flipping, ensure dropdown stays where it is
-                flip={false}
+                // plugins={[flip]}
             >
                 <div className={cx('search')}>
                     <input
